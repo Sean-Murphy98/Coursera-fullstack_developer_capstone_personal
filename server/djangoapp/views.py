@@ -53,7 +53,7 @@ def registration(request):
     username = data['userName']
     password = data['password']
     first_name = data['firstName']
-    last_name = date['lastName']
+    last_name = data['lastName']
     email = data['email']
     username_exist = False
     email_exist = False
@@ -94,23 +94,23 @@ def get_dealerships(request, state="All"):
 # Create a `get_dealer_details` view to render the dealer details
 def get_dealer_details(request, dealer_id):
     if(dealer_id):
-        endpoint = "/fetchDealer/" + dealer_id
+        endpoint = "/fetchDealer/" + str(dealer_id)
         dealer = get_request(endpoint)
-        return JsonResponse({"status":200,"Dealer":dealer})
+        print(dealer)
+        return JsonResponse({"status":200,"dealer":dealer})
     else: 
         return JsonResponse({"status":400,"message":"Bad Request"})
 
-def get_dealer_reviews(request,dealer_id):
+def get_dealer_reviews(request, dealer_id):
+    # if dealer id has been provided
     if(dealer_id):
-        endpoint = "/fetchReviews/dealer/" + dealer_id
-        review_detail = get_request(endpoint)
-        if (review_detail):
-            for review in review_detail:
-                sentiment = analyze_review_sentiments(review['review'])
-                review["Sentiment"] = sentiment['sentiment']
-            return JsonResponse({"status":200,"Reviews":review_detail})
-        else: 
-            return JsonResponse({"status":404, "message":"No reviews entered yet"})
+        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
+        reviews = get_request(endpoint)
+        for review_detail in reviews:
+            response = analyze_review_sentiments(review_detail['review'])
+            print(response)
+            review_detail['sentiment'] = response['sentiment']
+        return JsonResponse({"status":200,"reviews":reviews})
     else:
         return JsonResponse({"status":400,"message":"Bad Request"})
 
