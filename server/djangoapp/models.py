@@ -23,7 +23,7 @@ class CarModel(models.Model):
     type = models.CharField(max_length=10, default="SUV",
                             choices={"Sedan": "Sedan", "SUV": "SUV", "Wagon": "Wagon"})
     year = models.IntegerField(default=2023,
-                                validators=[
+                               validators=[
                                     MaxValueValidator(2023),
                                     MinValueValidator(2015)])
     engineSize = models.DecimalField(max_digits=4,
