@@ -19,7 +19,7 @@ class CarModel(models.Model):
     test = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     dealerId = models.IntegerField(blank = False)
-    type = models.CharField(max_length=10,default = "SUV", choices={"Sedan":"Sedan","SUV":"SUV","Wagon":"Wagon"})
+    type = models.CharField(max_length=10, default = "SUV", choices={"Sedan":"Sedan","SUV":"SUV","Wagon":"Wagon"})
     year = models.IntegerField(default=2023, 
         validators=[
             MaxValueValidator(2023),
