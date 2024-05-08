@@ -21,17 +21,16 @@ class CarModel(models.Model):
     name = models.CharField(max_length=100)
     dealerId = models.IntegerField(blank=False)
     type = models.CharField(max_length=10, default="SUV",
-            choices={"Sedan": "Sedan", "SUV": "SUV", "Wagon": "Wagon"})
+                            choices={"Sedan": "Sedan", "SUV": "SUV", "Wagon": "Wagon"})
     year = models.IntegerField(default=2023,
-            validators=[
-                MaxValueValidator(2023),
-                MinValueValidator(2015)
-            ])
+                                validators=[
+                                    MaxValueValidator(2023),
+                                    MinValueValidator(2015)])
     engineSize = models.DecimalField(max_digits=4,
                                      decimal_places=1)
 
     def __str__(self):
-        return ("Make " + self.car_make.name + "model " + 
+        return ("Make " + self.car_make.name + "model " +
                 self.name + "type " + self.type)
 # - Type (CharField with a choices argument to provide limited choices
 # such as Sedan, SUV, WAGON, etc.)
