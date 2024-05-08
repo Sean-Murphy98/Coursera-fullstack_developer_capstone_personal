@@ -32,7 +32,7 @@ class CarModel(models.Model):
 
     def __str__(self):
         return "Make " + self.car_make.name + "model " + 
-                self.name + "type " + self.type
+        self.name + "type " + self.type
 # - Type (CharField with a choices argument to provide limited choices
 # such as Sedan, SUV, WAGON, etc.)
 # - Year (IntegerField) with min value 2015 and max value 2023
