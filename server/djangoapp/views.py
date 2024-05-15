@@ -77,8 +77,11 @@ def registration(request):
 
 
 def get_cars(request):
+    print("x")
     count = CarMake.objects.filter().count()
+    print(count)
     if (count == 0):
+        print(count)
         initiate()
     car_models = CarModel.objects.select_related('car_make')
     cars = []
@@ -93,6 +96,7 @@ def get_dealerships(request, state="All"):
     else:
         endpoint = "/fetchDealers/"+state
     dealerships = get_request(endpoint)
+    print("x")
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 
